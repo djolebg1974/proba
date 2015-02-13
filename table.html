@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta charset="windows-1250">
+<style>
+
+table, td {
+    border: 1px solid black;
+    color: black;
+    background-color : #ccffff ;
+    border-collapse:collapse;
+    
+}
+th {
+    border: 1px solid black;
+    color: darkblue;
+    background-color : #66ccff ;
+    border-collapse:collapse;
+}
+tr, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+li input {
+    position: absolute;
+    left: 0;
+    margin-left: 0;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+    height: 1em;
+    width: 1em;
+    top: 0;
+}
+li label {
+    background: url(folder-horizontal.png) 15px 1px no-repeat;
+    cursor: pointer;
+    display: block;
+    padding-left: 37px;
+}
+</style>
+</head>
+<script src="util.js"></script> 
+
+
+<body>
+<div id="ekran" style="border: 0px solid blue; position : absolute; left: 0%; top: 0%; width:100%; height:100%;">
+
+<div id="drvodiv" style="border: 1px solid; position: relative; left: 1%; top: 16px; width: 15%; height: 96%; overflow-y: scroll;">
+<ol>
+    <li class="file"><a href="document.pdf">File 1</a></li>
+    <li>
+        <label for="subfolder1">Subfolder 1</label>
+        <input type="checkbox" id="subfolder1" />
+        <ol>
+            <li class="file"><a href="">File 2</a></li>
+            <li class="file"><a href="">File 2</a></li>
+            <li class="file"><a href="">File 2</a></li>
+        </ol>
+    </li>
+</ol>
+</div>
+
+<div id="griddiv" style="border: 1px solid; position: relative; left: 17%; top: -94%; width: 80%; height: 56%; overflow-y: scroll;">
+
+
+<center>
+<label>PORESKE STOPE</label>
+<table id="grid">
+<script>
+loadTable("select * from nalogvrsta, pdvstopa");
+</script>
+</table>
+</center>
+</div>
+
+
+
+<div id="detaljidiv" style="border: 1px solid; position: relative; left: 17%; top: -92%; width: 80%; height: 38%; overflow-y: scroll;">
+<input name="trt" id="trt" type="button" value="mrt" onClick="clearDiv();">
+</div>
+
+</div>
+
+
+
+</body>
+</html>

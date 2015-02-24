@@ -56,8 +56,13 @@ function loadTable(sql) {
   }
   grid.innerHTML = str;
   naslov.innerHTML = naslovStr;
-  fusnota1.innerHTML = "Ukupno " + x.length + " redova";
-  if (x.length>10) fusnota2.innerHTML = "Ukupno " + x.length + " redova"; else fusnota2.innerHTML="";
+  redStr="redova";
+  if ((x.length%10==1) && (x.length%100!=11)) redStr="red";
+  if ((x.length%10==2) && (x.length%100!=12)) redStr="reda";
+  if ((x.length%10==3) && (x.length%100!=13)) redStr="reda";
+  if ((x.length%10==4) && (x.length%100!=14)) redStr="reda";
+  fusnota1.innerHTML = "Ukupno " + x.length + " " + redStr;
+  if (x.length>10) fusnota2.innerHTML = "Ukupno " + x.length + " " + redStr; else fusnota2.innerHTML="";
   sorttable.makeSortable(grid);
 }
 
@@ -67,6 +72,13 @@ function loadMenu() {
   xmlhttp.open("POST","http://127.0.0.1:8080/proba/menuLoader.jsp",false);
   xmlhttp.send();
   drvodiv.innerHTML = xmlhttp.responseText;
+}
+
+function loadLabel(div,ime,labText,labLeft,labTop,labWidth,txtAlign,fontSize) {
+  str = "<div id='" + ime + "Div1' style='position:absolute; left:" + labLeft + "px; top:" + (labTop+2) + "px; width:" + labWidth + "px; text-align:" + txtAlign + "'>";
+  str += "<label id='" + ime + "Lbl' style='font-family:Arial; font-weight:normal; font-size:" + fontSize + "'>" + labText + "</label>";
+  str += "</div>";
+  div.innerHTML += str;
 }
 
 function loadTxtField(ime,tip,labText,txtText,labLeft,txtTop,txtLeft,txtWidth,txtSize,txtMaxLength) {
@@ -133,4 +145,48 @@ function formatNumber(number, digits, decimalPlaces, withCommas)
     }
 
     return string;
+}
+
+function tableRowSelect(table,broj) {
+    for(i=0;i<table.rows.length-1;i++)
+      if (table.rows[i+1].cells[0].innerHTML==broj) for(j=0;j<table.rows[i+1].cells.length;j++) table.rows[i+1].cells[j].style.backgroundColor = '#66FFFF';
+      else for(j=0;j<table.rows[i+1].cells.length;j++) table.rows[i+1].cells[j].style.backgroundColor = '#CCFFFF';
+}
+
+function tableRowAdd(table,broj,sql) {
+  currRow=table.insertRow(); 
+  for(j=0;j<table.rows[0].cells.length;j++) {
+    currRow.insertCell(j); 
+    if (table.rows.length>1) {
+      currRow.cells[j].align=table.rows[1].cells[j].align;
+      currRow.cells[j].innerHTML=table.rows[1].cells[j].innerHTML;
+    }
+  }
+  currRow.cells[0].innerHTML=broj;
+  currRow.cells[rows[0].cells.length-2].innerHTML="<img name='" + broj + "' src='Edit.png' alt='izmena' title='izmena' onClick=load" + sql + "(" + broj + ",'update');>";
+  currRow.cells[rows[0].cells.length-1].innerHTML="<img name='" + broj + "' src='Delete.gif' alt='brisanje' title='brisanje' onClick=exec" + sql + "('delete'," + broj + ");>";
+  alert(currRow.cells[rows[0].cells.length-2].innerHTML);
+}
+
+function remodelDivs(smer) {
+  if ((griddiv.style.height=='50%') && (smer='up')) {
+    griddiv.style.height='10%';
+    detaljidiv.style.height='81%';
+    return;
+  }
+  if ((griddiv.style.height=='50%') && (smer='down')) {
+    griddiv.style.height='86%';
+    detaljidiv.style.height='5%';
+    return;
+  }
+  if ((griddiv.style.height=='86%') && (smer='up')) {
+    griddiv.style.height='50%';
+    detaljidiv.style.height='41%';
+    return;
+  }
+  if ((griddiv.style.height=='10%') && (smer='down')) {
+    griddiv.style.height='50%';
+    detaljidiv.style.height='41%';
+    return;
+  }  
 }

@@ -114,25 +114,51 @@ ol.tree
 <body>
 <div id="ekran" style="border: 0px solid blue; position : absolute; left: 0%; top: 0%; width:100%; height:100%;">
 
-<div id="drvodiv" style="overflow: hidden; background-color:#FFFFD2; border: 1px solid; position: relative; left: 1%; top: 16px; width: 15%; height: 96%; overflow-y: scroll;">
+<div id="contextdiv" style="overflow: hidden; background-color:#FFCC00; border: 1px solid; position: relative; left: 0.5%; top: 4px; width: 99%; height: 6%; overflow-y: none;">
+<img src="drristic-logo.png"  height="42" width="138"></img>
+<script> loadLabel(contextdiv,"korisnikLbl","Korisnik:",120,10,100,"right",14); </script>
+<script> loadLabel(contextdiv,"korisnik","Administrator",230,10,150,"left",14); </script>
+<script> loadLabel(contextdiv,"firmaLbl","Firma:",400,10,60,"right",14); </script>
+<script> loadLabel(contextdiv,"firma","Probna firma",470,10,200,"left",14); </script>
+<script> loadLabel(contextdiv,"firmaId","1",1500,10,150,"right",14); </script>
+<script> loadLabel(contextdiv,"timer","",1190,10,150,"right",14); </script>
+<script> setInterval(function() {var currentdate = new Date(); 
+timerLbl.innerHTML = formatNumber(currentdate.getDate(),2,0,false) + "."
+                + formatNumber(currentdate.getMonth(),2,0,false)  + "." 
+                + currentdate.getFullYear() + " "  
+                + formatNumber(currentdate.getHours(),2,0,false) + ":"  
+                + formatNumber(currentdate.getMinutes(),2,0,false) + ":" 
+                + formatNumber(currentdate.getSeconds(),2,0,false); },1000);
+</script>
+</div>                                                         
+
+<div id="drvodiv" style="overflow: hidden; background-color:#FFFFD2; border: 1px solid; position: relative; left: 0.5%; top: 6px; width: 15%; height: 92%; overflow-y: scroll;">
 </div>
 
-<div id="griddiv" style="background-color:#FFFFD2; border: 1px solid; position: relative; left: 17%; top: -94%; width: 82%; height: 56%; overflow-y: scroll;">
+
+<div id="griddiv" style="background-color:#FFFFD2; border: 1px solid; position: relative; left: 16%; top: -91.5%; width: 83.5%; height: 50%; overflow-y: scroll;">
 
 
 <center>
-<label id="naslov" style="font-family:Arial; font-weight:bold; font-size:20"></label><br><br>
+<label id="naslov" style="font-family:Arial; font-weight:normal; font-size:24"></label>
+<br>
 <label id="fusnota1" style="font-family:Arial; font-weight:normal; font-size:9"></label>
 <table id="grid" class="sortable">
 <script> loadMenu(); </script>
 </table>
 <label id="fusnota2" style="font-family:Arial; font-weight:normal; font-size:9"></label>
 </center>
+
+<!--    <div id="movediv" style="background-color:#FFFFD2; border: 0px solid; position: relative; left: 49%; top:89%; width: 2%; height: 5%; overflow-y: scroll;">
+    <center><img src="arrowdown.png" height="16" width="16" onClick=remodelDivs('down');></img></center>
+    </div>
+--!>
+</div>  
+
+
+<div id="detaljidiv" style="background-color:#FFFFD2; border: 1px solid; position: relative; left: 16%; top: -91%; width: 83.5%; height: 41%; overflow-y: scroll;">
 </div>
 
-<div id="detaljidiv" style="background-color:#FFFFD2; border: 1px solid; position: relative; left: 17%; top: -92%; width: 82%; height: 38%; overflow-y: scroll;">
-
-</div>
 
 
 </div>

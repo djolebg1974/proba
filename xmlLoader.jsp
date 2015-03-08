@@ -5,19 +5,21 @@
 <%@ page import="com.mysql.jdbc.*" %>
 <%@ page pageEncoding="UTF-8"%>
 <%
+    java.sql.Connection conn = null;
     try {
       String sql = "";
       String naslov = "";
       Class.forName("com.mysql.jdbc.Driver").newInstance();
-      java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" +
+      conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" +
           "user=root&password=service");
       java.sql.Statement stmt = conn.createStatement();
       sql = "select sqltekst,naslov,idpart from sqlizraz where oznaka='" + request.getParameter("sql").trim() + "'";
       java.sql.ResultSet rs = stmt.executeQuery(sql);
       rs.first();
       sql = rs.getString(1);
-      naslov = rs.getString(2).trim();
+      naslov = rs.getString(2).trim();    
       if (request.getParameter("id")!=null) sql += " " + rs.getString(3).trim() + request.getParameter("id").trim();
+      if (request.getParameter("where")!=null) sql += " " + request.getParameter("where").trim();
       rs.close();
       rs = stmt.executeQuery(sql);
       int colNumber = rs.getMetaData().getColumnCount();    
@@ -39,12 +41,14 @@
       }
         out.println("</ROW>");
       }
+      out.println("</PROBA>");
     }
     catch (SQLException ex) {
-      // handle any errors
-      System.out.println("SQLException: " + ex.getMessage());
-      System.out.println("SQLState: " + ex.getSQLState());
-      System.out.println("VendorError: " + ex.getErrorCode());
+      out.println("<ERR><COL>Ulazni parametar :" + request.getParameter("sql").trim());
+      out.println("Err: " + ex.getErrorCode() + " " + ex.getMessage()+ "</COL></ERR>");
     }
-    out.println("</PROBA>");
+    finally {
+      if (conn!=null) conn.close();
+    }
+    
 %>   

@@ -111,6 +111,7 @@ ol.tree
 <script src="util.js"></script> 
 <script src="sifarnici.js"></script> 
 <script src="sorttable.js"></script>
+<script src="gk.js"></script>
 <body>
 <div id="ekran" style="border: 0px solid blue; position : absolute; left: 0%; top: 0%; width:100%; height:100%;">
 
@@ -142,11 +143,14 @@ timerLbl.innerHTML = formatNumber(currentdate.getDate(),2,0,false) + "."
 <center>
 <label id="naslov" style="font-family:Arial; font-weight:normal; font-size:24"></label>
 <br>
-<label id="fusnota1" style="font-family:Arial; font-weight:normal; font-size:9"></label>
-<table id="grid" class="sortable">
+<div id="filter" style="background-color:transparent; border: 0px solid; position: absolute; left: 0px; top: 27px; width: 100%; height: 100px;"></div>
+
+<label id="fusnota0" style="font-family:Arial; font-weight:normal; font-size:9"></label>
 <script> loadMenu(); </script>
+<table id="grid" class="sortable">
+
 </table>
-<label id="fusnota2" style="font-family:Arial; font-weight:normal; font-size:9"></label>
+<label id="fusnota" style="font-family:Arial; font-weight:normal; font-size:9"></label>
 </center>
 
 <!--    <div id="movediv" style="background-color:#FFFFD2; border: 0px solid; position: relative; left: 49%; top:89%; width: 2%; height: 5%; overflow-y: scroll;">
